@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './app.css'
 
 import Sample from 'lodash.sample'
@@ -23,15 +23,17 @@ function EnableFlags(props: { name: string, flags: string[], setFlags: (_: strin
   )
 }
 
-function EnableButton(props: { name: keyof typeof Word, words: { name: string }[], setWords: (_: any) => void }) {
-  const [enabled, setEnabled] = useState(false)
+function EnableButton(props: { name: keyof typeof Word, words: Map<string, any>, setWords: (_: any) => void }) {
   const { name, words, setWords } = props
+  const [enabled, setEnabled] = useState(words.has(name))
   return (
     <>
       <input type="checkbox" checked={ enabled } onChange={ () => {
         enabled
-          ? setWords(words.filter(i => !Word[name].find(j => i.name === j.name) ))
-          : setWords([...words, ...Word[name]])
+          ? words.delete(name)
+          : words.set(name, Word[name])
+
+        setWords(Object.fromEntries(words))
         setEnabled(!enabled)
       } } />
       <label>{ name }</label>
@@ -40,8 +42,10 @@ function EnableButton(props: { name: keyof typeof Word, words: { name: string }[
 }
 
 function App() {
-  const [words, setWords] = useState(Word.a)
+  const [words, setWords] = useState(Word)
   const [flags, setFlags] = useState<string[]>(Flags)
+
+  const mapWord = useRef(new Map(Object.entries(Word)))
 
   function next(): string {
     return Sample(Object.keys(words)) || "a"
@@ -61,7 +65,7 @@ function App() {
       { Flags.map(i => <EnableFlags key={ i } name={ i } flags={ flags } setFlags={ a => setFlags(a) } />) }
       <hr/>
 
-      { Object.keys(Word).map(i => <EnableButton key={ i } name={ i as keyof typeof Word } words={ words } setWords={ (d) => setWords(d) } />) }
+      { Object.keys(Word).map(i => <EnableButton key={ i } name={ i as keyof typeof Word } words={ mapWord.current } setWords={ (d) => setWords(d) } />) }
     </div>
   )
 }

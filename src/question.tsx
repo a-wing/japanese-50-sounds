@@ -3,31 +3,38 @@ import SampleSize from 'lodash.samplesize'
 import Random from 'lodash.random'
 
 function Question(props: { flags: string[], word: string, words: { [_: string]: any }, next: () => void }) {
-  const answers = SampleSize(Object.keys(props.words), 4)
-  if (!answers.find(i => i === props.word)) {
+  const { flags, word } = props
+  const words: Array<any> = [].concat(...Object.values(props.words))
+
+  const question = words.find(i => i.name === word)
+  const answers = SampleSize(words, 4)
+  if (!answers.find(i => i.name === word)) {
     const i = Random(answers.length - 1)
-    answers[i] = props.word
+    answers[i] = question
   }
 
-  const { flags, word, words } = props
   const [questionType, answerType] = SampleSize(flags, 2)
 
   const [show, setShow] = useState(false)
   return (
     <>
-      { words[word]
+      { question
         ? <div>
-            <p>{ words[word][questionType] }</p>
+            <p>请选择 { question[questionType] } 的 { answerType }</p>
             { show
-              ? <p>{ JSON.stringify(words[word]) }</p>
+              ? <>
+                  <p>romaji: { question.romaji }</p>
+                  <p>hiragana: { question.hiragana }</p>
+                  <p>katakana: { question.katakana }</p>
+                </>
               : <></>
             }
 
-            { answers.map(i => <button key={i} onClick={ () => {
-              words[i].name === words[word].name
+            { answers.map(i => <button key={`answers-${i.name}`} onClick={ () => {
+              i.name === question.name
                 ? (() => { props.next(); setShow(false) })()
                 : setShow(true)
-            } } >{ words[i][answerType] }</button>) }
+            } } >{ i[answerType] }</button>) }
           </div>
         : <p>has a error: { word }</p>
       }
