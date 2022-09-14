@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import './app.css'
 
-import Sample from 'lodash.sample'
-
 import Word from './data'
 import { Flags } from './lib'
 import Question from './question'
@@ -47,19 +45,10 @@ function App() {
 
   const mapWord = useRef(new Map(Object.entries(Word)))
 
-  function next(): string {
-    return Sample(Object.keys(words)) || "a"
-  }
-
-  const [question, setQuestion] = useState(next())
-  useEffect(() => {
-    setQuestion(next())
-  }, [words])
-
   return (
     <div className="App">
       <h1>这回一定会熟练掌握日语五十音</h1>
-      <Question flags={ flags } word={ question } words={ words } next={ () => setQuestion(next()) } />
+      <Question flags={ flags } words={ words } />
 
       <hr/>
       { Flags.map(i => <EnableFlags key={ i } name={ i } flags={ flags } setFlags={ a => setFlags(a) } />) }

@@ -1,42 +1,74 @@
-import { useState } from 'react'
-import SampleSize from 'lodash.samplesize'
+import { useEffect, useState } from 'react'
+
 import Random from 'lodash.random'
+import SampleSize from 'lodash.samplesize'
 
-function Question(props: { flags: string[], word: string, words: { [_: string]: any }, next: () => void }) {
-  const { flags, word } = props
-  const words: Array<any> = [].concat(...Object.values(props.words))
+function Answers(props: { answer?: any }) {
+  const answer = props.answer
+  return (
+    <>
+      { answer
+        ? <>
+            <p>romaji: { answer.romaji }</p>
+            <p>hiragana: { answer.hiragana }</p>
+            <p>katakana: { answer.katakana }</p>
+          </>
+        : <></>
+      }
+    </>
+  )
+}
 
-  const question = words.find(i => i.name === word)
-  const answers = SampleSize(words, 4)
-  if (!answers.find(i => i.name === word)) {
+function generateQuestion<T>(flags: string[], libs: T[]): { qType: string, aType: string, Q: T, A: T[] } {
+  const [qType, aType] = SampleSize(flags, 2)
+
+  const [question] = SampleSize(libs, 1)
+  const answers = SampleSize(libs, 4)
+  if (!answers.find(i => i === question)) {
     const i = Random(answers.length - 1)
     answers[i] = question
   }
 
-  const [questionType, answerType] = SampleSize(flags, 2)
+  return {
+    qType: qType,
+    aType: aType,
+    Q: question,
+    A: answers,
+  }
+}
 
+function Question(props: { flags: string[], words: { [_: string]: any } }) {
+  const { flags, words } = props
   const [show, setShow] = useState(false)
+
+  const next = () => {
+    const words: Array<any> = [].concat(...Object.values(props.words))
+    return generateQuestion(flags, words)
+  }
+
+  const [current, setCurrent] = useState(next())
+  const { qType, aType, Q, A } = current
+
+  useEffect(() => {
+    setShow(false)
+    setCurrent(next())
+  }, [flags, words])
+
   return (
     <>
-      { question
+      { Q
         ? <div>
-            <p>请选择 { question[questionType] } 的 { answerType }</p>
-            { show
-              ? <>
-                  <p>romaji: { question.romaji }</p>
-                  <p>hiragana: { question.hiragana }</p>
-                  <p>katakana: { question.katakana }</p>
-                </>
-              : <></>
-            }
+            <p>请选择 { Q[qType] } 的 { aType }</p>
 
-            { answers.map(i => <button key={`answers-${i.name}`} onClick={ () => {
-              i.name === question.name
-                ? (() => { props.next(); setShow(false) })()
+            <Answers answer={ show ? Q : undefined } />
+
+            { A.map(i => <button key={`answers-${i.name}`} onClick={ () => {
+              i.name === Q.name
+                ? (() => { setCurrent(next()); setShow(false) })()
                 : setShow(true)
-            } } >{ i[answerType] }</button>) }
+            } } >{ i[aType] }</button>) }
           </div>
-        : <p>has a error: { word }</p>
+        : <p>has a error</p>
       }
     </>
   )
