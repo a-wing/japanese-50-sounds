@@ -1,195 +1,241 @@
 export default {
   a: [{
     name: "a",
+    romaji: "a",
     hiragana: "あ",
     katakana: "ア",
   }, {
     name: "i",
+    romaji: "i",
     hiragana: "い",
     katakana: "イ",
   }, {
     name: "u",
+    romaji: "u",
     hiragana: "う",
     katakana: "ウ",
   }, {
     name: "e",
+    romaji: "e",
     hiragana: "え",
     katakana: "エ",
   }, {
     name: "o",
+    romaji: "o",
     hiragana: "お",
     katakana: "オ",
   }],
   ka: [{
     name: "ka",
+    romaji: "ka",
     hiragana: "か",
     katakana: "カ",
   }, {
     name: "ki",
+    romaji: "ki",
     hiragana: "き",
     katakana: "キ",
   }, {
     name: "ku",
+    romaji: "ku",
     hiragana: "く",
     katakana: "ク",
   }, {
     name: "ke",
+    romaji: "ke",
     hiragana: "け",
     katakana: "ケ",
   }, {
     name: "ko",
+    romaji: "ko",
     hiragana: "こ",
     katakana: "コ",
   }],
   sa: [{
     name: "sa",
+    romaji: "sa",
     hiragana: "さ",
     katakana: "サ",
   }, {
     name: "si",
+    romaji: "si (shi)",
     hiragana: "し",
     katakana: "シ",
   }, {
     name: "su",
+    romaji: "su",
     hiragana: "す",
     katakana: "ス",
   }, {
     name: "se",
+    romaji: "se",
     hiragana: "せ",
     katakana: "セ",
   }, {
     name: "so",
+    romaji: "so",
     hiragana: "そ",
     katakana: "ソ",
   }],
   ta: [{
     name: "ta",
+    romaji: "ta",
     hiragana: "た",
     katakana: "タ",
   }, {
     name: "ti",
+    romaji: "ti (chi)",
     hiragana: "ち",
     katakana: "チ",
   }, {
     name: "tu",
+    romaji: "tu (tsu)",
     hiragana: "つ",
     katakana: "ツ",
   }, {
     name: "te",
+    romaji: "te",
     hiragana: "て",
     katakana: "テ",
   }, {
     name: "to",
+    romaji: "to",
     hiragana: "と",
     katakana: "ト",
   }],
   na: [{
     name: "na",
+    romaji: "na",
     hiragana: "な",
     katakana: "ナ",
   }, {
     name: "ni",
+    romaji: "ni",
     hiragana: "に",
     katakana: "ニ",
   }, {
     name: "nu",
+    romaji: "nu",
     hiragana: "ぬ",
     katakana: "ヌ",
   }, {
     name: "ne",
+    romaji: "ne",
     hiragana: "ね",
     katakana: "ネ",
   }, {
     name: "no",
+    romaji: "no",
     hiragana: "の",
     katakana: "ノ",
   }],
   ha: [{
     name: "ha",
+    romaji: "ha",
     hiragana: "は",
     katakana: "ハ",
   }, {
     name: "hi",
+    romaji: "hi",
     hiragana: "ひ",
     katakana: "ヒ",
   }, {
     name: "hu",
+    romaji: "hu (fu)",
     hiragana: "ふ",
     katakana: "フ",
   }, {
     name: "he",
+    romaji: "he",
     hiragana: "へ",
     katakana: "ヘ",
   }, {
     name: "ho",
+    romaji: "ho",
     hiragana: "ほ",
     katakana: "ホ",
   }],
   ma: [{
     name: "ma",
+    romaji: "ma",
     hiragana: "ま",
     katakana: "マ",
   }, {
     name: "mi",
+    romaji: "mi",
     hiragana: "み",
     katakana: "ミ",
   }, {
     name: "mu",
+    romaji: "mu",
     hiragana: "む",
     katakana: "ム",
   }, {
     name: "me",
+    romaji: "me",
     hiragana: "め",
     katakana: "メ",
   }, {
     name: "mo",
+    romaji: "mo",
     hiragana: "も",
     katakana: "モ",
   }],
   ya: [{
     name: "ya",
+    romaji: "ya",
     hiragana: "や",
     katakana: "ヤ",
   }, {
     name: "yu",
+    romaji: "yu",
     hiragana: "ゆ",
     katakana: "ユ",
   }, {
     name: "yo",
+    romaji: "yo",
     hiragana: "よ",
     katakana: "ヨ",
   }],
   ra: [{
     name: "ra",
+    romaji: "ra",
     hiragana: "ら",
     katakana: "ラ",
   }, {
     name: "ri",
+    romaji: "ri",
     hiragana: "り",
     katakana: "リ",
   }, {
     name: "ru",
+    romaji: "ru",
     hiragana: "る",
     katakana: "ル",
   }, {
     name: "re",
+    romaji: "re",
     hiragana: "れ",
     katakana: "レ",
   }, {
     name: "ro",
+    romaji: "ro",
     hiragana: "ろ",
     katakana: "ロ",
   }],
   wa: [{
     name: "wa",
+    romaji: "wa",
     hiragana: "わ",
     katakana: "ワ",
   }, {
     name: "wo",
+    romaji: "wo",
     hiragana: "を",
     katakana: "ヲ",
   }, {
     name: "n",
+    romaji: "n",
     hiragana: "ん",
     katakana: "ン",
   }],
